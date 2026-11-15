@@ -1,0 +1,72 @@
+.shell {
+    display: flex;
+    min-height: 100vh;
+    background: var(--color-slate-50);
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: 264px;
+}
+
+.topbar {
+    display: none;
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-slate-100);
+    color: var(--color-slate-700);
+    cursor: pointer;
+}
+
+.topbarBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-slate-900);
+}
+
+.brandBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--gradient-button);
+    color: var(--color-white);
+}
+
+.pageArea {
+    flex: 1;
+}
+
+@media (max-width: 960px) {
+    .main {
+        margin-left: 0;
+    }
+
+    .topbar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 20px;
+        background: var(--color-white);
+        border-bottom: 1px solid var(--color-slate-200);
+        position: sticky;
+        top: 0;
+        z-index: 20;
+    }
+}

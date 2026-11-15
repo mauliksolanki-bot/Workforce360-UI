@@ -1,0 +1,70 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate-700);
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 14px;
+    background: var(--color-white);
+    border: 1.5px solid var(--color-slate-200);
+    border-radius: var(--radius-md);
+    transition:
+            border-color var(--transition-fast),
+            box-shadow var(--transition-fast);
+}
+
+.inputWrapper:focus-within {
+    border-color: var(--color-brand-500);
+    box-shadow: var(--shadow-focus-brand);
+}
+
+.inputWrapperError {
+    border-color: var(--color-danger-500);
+}
+
+.inputWrapperError:focus-within {
+    box-shadow: var(--shadow-focus-danger);
+}
+
+.icon {
+    display: flex;
+    color: var(--color-slate-400);
+    flex-shrink: 0;
+}
+
+.input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: var(--color-slate-900);
+}
+
+.input::placeholder {
+    color: var(--color-slate-400);
+}
+
+.adornment {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.errorText {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-danger-600);
+}

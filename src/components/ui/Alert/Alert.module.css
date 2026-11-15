@@ -1,0 +1,58 @@
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.45;
+    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.alert p {
+    margin: 0;
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.error {
+    background: var(--color-danger-50);
+    color: var(--color-danger-600);
+    border: 1px solid var(--color-danger-100);
+}
+
+.success {
+    background: var(--color-success-50);
+    color: var(--color-success-600);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.info {
+    background: var(--color-brand-50);
+    color: var(--color-brand-700);
+    border: 1px solid var(--color-brand-100);
+}
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translateX(-1px);
+    }
+    20%,
+    80% {
+        transform: translateX(2px);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translateX(-3px);
+    }
+    40%,
+    60% {
+        transform: translateX(3px);
+    }
+}
