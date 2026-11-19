@@ -43,7 +43,7 @@ export function DashboardPage() {
                     </div>
                     <div className={styles.infoCard}>
                         <h3>Reporting manager</h3>
-                        <p>{user.reportingManager ?? 'Not specified'}</p>
+                        <p>{user.reportingManager?.trim() || 'Not specified'}</p>
                     </div>
                 </section>
             </main>

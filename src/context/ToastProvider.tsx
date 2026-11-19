@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { ToastContext, type ToastContextValue, type ToastItem } from './toastContext';
 import { ToastViewport } from '../components/ui/Toast/ToastViewport';
+import { API_ERROR_TOAST_EVENT } from '../utils/apiErrorToast';
 
 let fallbackIdCounter = 0;
 
@@ -20,14 +21,24 @@ function createToastId(): string {
  */
 export function ToastProvider({ children }: { children: ReactNode }) {
     const [toasts, setToasts] = useState<ToastItem[]>([]);
+    const lastErrorToastAt = useRef(0);
 
     const dismissToast = useCallback((id: string) => {
         setToasts((current) => current.filter((toast) => toast.id !== id));
     }, []);
 
     const showToast = useCallback<ToastContextValue['showToast']>((variant, message, title) => {
+        const now = Date.now();
+        if (variant === 'error' && now - lastErrorToastAt.current < 300) return;
+        if (variant === 'error') lastErrorToastAt.current = now;
         setToasts((current) => [...current, { id: createToastId(), variant, message, title }]);
     }, []);
+
+    useEffect(() => {
+        const showGenericError = () => showToast('error', 'Something went wrong. Please try again.', 'Request failed');
+        window.addEventListener(API_ERROR_TOAST_EVENT, showGenericError);
+        return () => window.removeEventListener(API_ERROR_TOAST_EVENT, showGenericError);
+    }, [showToast]);
 
     const value = useMemo<ToastContextValue>(
         () => ({

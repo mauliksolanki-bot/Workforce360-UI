@@ -1,4 +1,4 @@
-import { Circle, LayoutDashboard, ReceiptText, ShieldCheck, UserCircle } from 'lucide-react';
+import { CalendarDays, CalendarRange, Circle, ClipboardCheck, FilePenLine, KeyRound, LayoutDashboard, ReceiptText, ScrollText, ShieldCheck, UserCircle, WalletCards } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface NavRoute {
@@ -19,6 +19,13 @@ const NAV_ROUTES_BY_CODE: Record<string, NavRoute> = {
     PROFILE: { path: '/profile', icon: UserCircle },
     ROLES_DESIGNATIONS: { path: '/roles-designations', icon: ShieldCheck },
     PAYROLL: { path: '/payroll', icon: ReceiptText },
+    LEAVE_MANAGEMENT: { path: '/leave-management', icon: CalendarDays },
+    APPLY_LEAVE: { path: '/leave-management/apply-leave', icon: FilePenLine },
+    LEAVE_BALANCE: { path: '/leave-management/leave-history', icon: WalletCards },
+    LEAVE_APPROVALS: { path: '/leave-management/leave-approvals', icon: ClipboardCheck },
+    HOLIDAY_CALENDAR: { path: '/leave-management/holiday-calendar', icon: CalendarRange },
+    AUDIT: { path: '/audit', icon: ScrollText },
+    USER_ACCESS: { path: '/audit/user-access', icon: KeyRound },
 };
 
 const DEFAULT_NAV_ROUTE: NavRoute = { path: '/dashboard', icon: Circle };

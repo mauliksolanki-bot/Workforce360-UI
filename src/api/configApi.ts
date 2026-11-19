@@ -35,15 +35,15 @@ async function getStaticConfig(path: string, signal?: AbortSignal): Promise<NxtG
 
 /** Calls `GET /config/editedudetailspopup`, matching `NxtGenStaticConfigController.getEduDetailsPopup`. */
 export function fetchEditEducationDetailsPopupConfig(signal?: AbortSignal): Promise<NxtGenStaticConfig> {
-    return getStaticConfig('/config/editedudetailspopup', signal);
+    return getStaticConfig('/ui-configurations/popup-layouts/edit-education-details', signal);
 }
 
 export function fetchEditRoleDesignationPopupConfig(signal?: AbortSignal): Promise<NxtGenStaticConfig> {
-    return getStaticConfig('/config/editroledesignationpopup', signal);
+    return getStaticConfig('/ui-configurations/popup-layouts/edit-role-designation', signal);
 }
 
 export function fetchDeleteConfirmationPopupConfig(signal?: AbortSignal): Promise<NxtGenStaticConfig> {
-    return getStaticConfig('/config/deleteconfirm', signal);
+    return getStaticConfig('/ui-configurations/popup-layouts/delete-confirmation', signal);
 }
 
 function toConfigApiError(error: unknown): ConfigApiError {

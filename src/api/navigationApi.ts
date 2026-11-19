@@ -20,7 +20,7 @@ export class NavigationApiError extends Error {
 /** Calls `GET /navigation`, matching `NxtGenNavigationController`. */
 export async function fetchNavigation(signal?: AbortSignal): Promise<NxtGenNavigation[]> {
     try {
-        const { data } = await httpClient.get<NxtGenNavigation[]>('/navigation', { signal });
+        const { data } = await httpClient.get<NxtGenNavigation[]>('/navigation-menu', { signal });
         return data;
     } catch (error) {
         throw toNavigationApiError(error);

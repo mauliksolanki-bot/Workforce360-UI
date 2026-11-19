@@ -18,7 +18,7 @@ export class EducationApiError extends Error {
 /** Calls `PUT /saveeducationdetails`, matching `NxtGenEducationController`. */
 export async function saveEducationDetails(education: NxtGenEducationDetail[]): Promise<NxtGenUser> {
     try {
-        const { data } = await httpClient.put<NxtGenUser>('/saveeducationdetails', { education });
+        const { data } = await httpClient.put<NxtGenUser>('/employees/me/education-details', { education });
         return data;
     } catch (error) {
         throw toEducationApiError(error);

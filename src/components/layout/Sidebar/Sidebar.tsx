@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { LogOut, X } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { ChevronDown, ChevronRight, LogOut, X } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { useToast } from '../../../hooks/useToast';
 import { fetchNavigation, NavigationApiError } from '../../../api/navigationApi';
@@ -21,7 +21,9 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
     const { user, logout } = useAuth();
     const { showInfo } = useToast();
+    const location = useLocation();
     const [navItems, setNavItems] = useState<NxtGenNavigation[]>([]);
+    const [expandedParents, setExpandedParents] = useState<Set<number>>(new Set());
 
     useEffect(() => {
         const controller = new AbortController();
@@ -47,6 +49,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         };
     }, []);
 
+    useEffect(() => {
+        const activeChild = navItems.find((item) => item.parentNavigationId !== null && resolveNavRoute(item.code).path === location.pathname);
+        if (activeChild?.parentNavigationId === null || activeChild?.parentNavigationId === undefined) return;
+        setExpandedParents((current) => current.has(activeChild.parentNavigationId!) ? current : new Set(current).add(activeChild.parentNavigationId!));
+    }, [location.pathname, navItems]);
+
     if (!user) {
         return null;
     }
@@ -58,6 +66,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         logout();
         showInfo('You have been signed out.', 'Signed out');
     };
+    const topLevelItems = navItems.filter((item) => item.parentNavigationId === null);
+    const childrenFor = (parentId: number) => navItems.filter((item) => item.parentNavigationId === parentId);
+    const toggleParent = (parentId: number) => setExpandedParents((current) => {
+        const next = new Set(current);
+        next.has(parentId) ? next.delete(parentId) : next.add(parentId);
+        return next;
+    });
 
     return (
         <>
@@ -75,16 +90,22 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </div>
 
                 <nav className={styles.nav} aria-label="Primary">
-                    <span className={styles.navLabel}>Main menu</span>
                     <ul>
-                        {navItems.map(({ id, code, displayName }) => {
+                        {topLevelItems.map((item) => {
+                            const { id, code, displayName, isParent } = item;
                             const { path, icon: Icon } = resolveNavRoute(code);
+                            const children = childrenFor(id);
+                            const isExpanded = expandedParents.has(id);
+                            if (isParent === 'Y') {
+                                return <li key={id}><button type="button" className={styles.parentLink} data-nav-code={code} onClick={() => toggleParent(id)} aria-expanded={isExpanded}><span className={styles.parentLabel}><Icon size={18} aria-hidden="true" /><span>{displayName}</span></span>{isExpanded ? <ChevronDown size={17} aria-hidden="true" /> : <ChevronRight size={17} aria-hidden="true" />}</button>{isExpanded && children.length ? <ul className={styles.childMenu}>{children.map((child) => { const { path: childPath, icon: ChildIcon } = resolveNavRoute(child.code); return <li key={child.id}><NavLink to={childPath} end onClick={onClose} data-nav-code={child.code} className={({ isActive }) => [styles.childLink, isActive ? styles.navLinkActive : null].filter(Boolean).join(' ')}><ChildIcon size={16} aria-hidden="true" /><span>{child.displayName}</span></NavLink></li>; })}</ul> : null}</li>;
+                            }
                             return (
                                 <li key={id}>
                                     <NavLink
                                         to={path}
                                         end
                                         onClick={onClose}
+                                        data-nav-code={code}
                                         className={({ isActive }) =>
                                             [styles.navLink, isActive ? styles.navLinkActive : null].filter(Boolean).join(' ')
                                         }

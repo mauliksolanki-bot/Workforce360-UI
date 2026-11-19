@@ -131,6 +131,85 @@
     color: var(--color-white);
 }
 
+.navLink:not(.navLinkActive)[data-nav-code='DASHBOARD'] svg { color: #4f7cff; }
+.navLink:not(.navLinkActive)[data-nav-code='PROFILE'] svg { color: #a855f7; }
+.navLink:not(.navLinkActive)[data-nav-code='ROLES_DESIGNATIONS'] svg { color: #e08a20; }
+.navLink:not(.navLinkActive)[data-nav-code='PAYROLL'] svg { color: #0f9b78; }
+.navLink:not(.navLinkActive)[data-nav-code='AUDIT'] svg { color: #b35b20; }
+.parentLink[data-nav-code='LEAVE_MANAGEMENT'] .parentLabel svg { color: #e05d83; }
+.parentLink[data-nav-code='AUDIT'] .parentLabel svg { color: #b35b20; }
+
+.parentLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-slate-600);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.parentLink:hover {
+    background: var(--color-slate-100);
+    color: var(--color-slate-900);
+}
+
+.parentLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.childMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 3px 0 4px 18px;
+    padding: 2px 0 2px 12px;
+    border-left: 1px solid var(--color-slate-200);
+}
+
+.childLink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-slate-600);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.childLink:hover {
+    background: var(--color-slate-100);
+    color: var(--color-slate-900);
+}
+
+.childLink:not(.navLinkActive)[data-nav-code='APPLY_LEAVE'] svg { color: #4f7cff; }
+.childLink:not(.navLinkActive)[data-nav-code='LEAVE_BALANCE'] svg { color: #0f9b78; }
+.childLink:not(.navLinkActive)[data-nav-code='LEAVE_APPROVALS'] svg { color: #a855f7; }
+.childLink:not(.navLinkActive)[data-nav-code='HOLIDAY_CALENDAR'] svg { color: #e08a20; }
+.childLink:not(.navLinkActive)[data-nav-code='USER_ACCESS'] svg { color: #b35b20; }
+
+.childLink.navLinkActive,
+.childLink.navLinkActive:hover {
+    background: var(--gradient-button);
+    color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.childLink.navLinkActive:hover {
+    background: var(--gradient-button-hover);
+}
+
 .footer {
     padding: 16px;
     border-top: 1px solid var(--color-slate-100);

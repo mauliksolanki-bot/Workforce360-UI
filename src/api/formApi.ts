@@ -20,7 +20,7 @@ export class FormApiError extends Error {
 /** Calls `GET /form/getformdetails?formCode=...`, matching `NxtGenFormController`. */
 export async function fetchFormFields(formCode: string, signal?: AbortSignal): Promise<NxtGenFormField[]> {
     try {
-        const { data } = await httpClient.get<NxtGenFormField[]>('/form/getformdetails', {
+        const { data } = await httpClient.get<NxtGenFormField[]>('/forms/details', {
             params: { formCode },
             signal,
         });

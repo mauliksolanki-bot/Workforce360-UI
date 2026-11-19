@@ -25,6 +25,7 @@ import { fetchProfile, ProfileApiError, saveProfileInformation } from '../../api
 import { Alert } from '../../components/ui/Alert/Alert';
 import { Button } from '../../components/ui/Button/Button';
 import { TextField } from '../../components/ui/TextField/TextField';
+import { ThemedSelect } from '../../components/ui/ThemedSelect/ThemedSelect';
 import { useToast } from '../../hooks/useToast';
 import type { NxtGenBankDetail, NxtGenBankDetailUpdate, NxtGenBankMaster, NxtGenUser } from '../../types/auth';
 import type { NxtGenFormField } from '../../types/form';
@@ -196,7 +197,7 @@ export function ProfilePage() {
         PHONE_NUMBER: user.phoneNumber,
         DATE_OF_JOINING: user.dateOfJoining,
         WORK_LOCATION: user.workLocation,
-        REPORTING_MANAGER: user.reportingManager,
+        REPORTING_MANAGER: user.reportingManager?.trim() || null,
         DESIGNATION: user.designation,
         PAN_NUMBER: user.panNumber,
         AADHAR_NUMBER: user.aadharNumber,
@@ -423,18 +424,16 @@ export function ProfilePage() {
                             onChange={(event) => updateBankFormValue('ifscCode', event.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 11))} />
                         <div className={styles.bankSelectField}>
                             <label htmlFor="bank-name" className={styles.formLabel}><Landmark size={14} aria-hidden="true" />{bankLabels.bankName}</label>
-                            <select id="bank-name" className={[styles.bankSelect, bankFormErrors.bankName ? styles.bankSelectError : null].filter(Boolean).join(' ')}
-                                disabled={!canUpdateBankDetails} value={bankFormValues.bankName}
-                                onChange={(event) => {
-                                    updateBankFormValue('bankName', event.target.value);
+                            <ThemedSelect ariaLabel={bankLabels.bankName} placeholder="Select bank" disabled={!canUpdateBankDetails} value={bankFormValues.bankName}
+                                className={[styles.bankSelect, bankFormErrors.bankName ? styles.bankSelectError : null].filter(Boolean).join(' ')}
+                                options={['', ...banks.map((bank) => bank.bankName)]}
+                                onChange={(value) => {
+                                    updateBankFormValue('bankName', value);
                                     updateBankFormValue('accountNumber', '');
                                     updateBankFormValue('repeatAccountNumber', '');
                                     setIsAccountNumberVisible(false);
                                     setIsRepeatAccountNumberVisible(false);
-                                }}>
-                                <option value="">Select bank</option>
-                                {banks.map((bank) => <option key={bank.id} value={bank.bankName}>{bank.bankName}</option>)}
-                            </select>
+                                }} />
                             {bankFormErrors.bankName ? <p className={styles.bankErrorText}>{bankFormErrors.bankName}</p> : null}
                         </div>
                         <TextField label={bankLabels.branchName} labelIcon={<MapPin size={14} />} labelClassName={styles.formLabel}
@@ -442,14 +441,10 @@ export function ProfilePage() {
                             onChange={(event) => updateBankFormValue('branchName', event.target.value)} />
                         <div className={styles.bankSelectField}>
                             <label htmlFor="account-type" className={styles.formLabel}><Landmark size={14} aria-hidden="true" />{bankLabels.accountType}</label>
-                            <select id="account-type" className={[styles.bankSelect, bankFormErrors.accountType ? styles.bankSelectError : null].filter(Boolean).join(' ')}
-                                disabled={!canUpdateBankDetails} value={bankFormValues.accountType}
-                                onChange={(event) => updateBankFormValue('accountType', event.target.value)}>
-                                <option value="">Select account type</option>
-                                <option value="Salary Account">Salary Account</option>
-                                <option value="Savings Account">Savings Account</option>
-                                <option value="Current Account">Current Account</option>
-                            </select>
+                            <ThemedSelect ariaLabel={bankLabels.accountType} placeholder="Select account type" disabled={!canUpdateBankDetails} value={bankFormValues.accountType}
+                                className={[styles.bankSelect, bankFormErrors.accountType ? styles.bankSelectError : null].filter(Boolean).join(' ')}
+                                options={['', 'Salary Account', 'Savings Account', 'Current Account']}
+                                onChange={(value) => updateBankFormValue('accountType', value)} />
                             {bankFormErrors.accountType ? <p className={styles.bankErrorText}>{bankFormErrors.accountType}</p> : null}
                         </div>
                     </div>

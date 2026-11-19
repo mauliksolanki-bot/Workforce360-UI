@@ -20,7 +20,7 @@ export class ProfileApiError extends Error {
 /** Calls `GET /profile`, matching `NxtGenProfileController`. */
 export async function fetchProfile(signal?: AbortSignal): Promise<NxtGenUser> {
     try {
-        const { data } = await httpClient.get<NxtGenUser>('/profile', { signal });
+        const { data } = await httpClient.get<NxtGenUser>('/employees/me/profile', { signal });
         return data;
     } catch (error) {
         throw toProfileApiError(error);
@@ -30,7 +30,7 @@ export async function fetchProfile(signal?: AbortSignal): Promise<NxtGenUser> {
 /** Calls `PUT /saveprofileinformation` to update the signed-in user's editable profile data. */
 export async function saveProfileInformation(phoneNumber: string): Promise<NxtGenUser> {
     try {
-        const { data } = await httpClient.put<NxtGenUser>('/saveprofileinformation', { phoneNumber });
+        const { data } = await httpClient.put<NxtGenUser>('/employees/me/profile/contact-information', { phoneNumber });
         return data;
     } catch (error) {
         throw toProfileApiError(error);

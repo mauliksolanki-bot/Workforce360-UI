@@ -10,7 +10,7 @@ interface ModalProps {
     onClose: () => void;
     children: ReactNode;
     footer?: ReactNode;
-    size?: 'md' | 'lg';
+    size?: 'md' | 'lg' | 'xl';
 }
 
 /** Generic, accessible dialog shell: backdrop, Escape-to-close, header/body/footer slots. */
@@ -52,7 +52,7 @@ export function Modal({ isOpen, title, description, onClose, children, footer, s
         >
             <div
                 ref={dialogRef}
-                className={[styles.dialog, size === 'lg' ? styles.dialogLarge : null].filter(Boolean).join(' ')}
+                className={[styles.dialog, size === 'lg' ? styles.dialogLarge : null, size === 'xl' ? styles.dialogExtraLarge : null].filter(Boolean).join(' ')}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-title"

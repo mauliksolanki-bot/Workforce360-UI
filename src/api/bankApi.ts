@@ -20,7 +20,7 @@ export class BankApiError extends Error {
 /** Calls `GET /bankdetails` for the signed-in user's single bank record. */
 export async function fetchBankDetails(signal?: AbortSignal): Promise<NxtGenBankDetail | null> {
     try {
-        const response = await httpClient.get<NxtGenBankDetail>('/bankdetails', { signal });
+        const response = await httpClient.get<NxtGenBankDetail>('/employees/me/bank-details', { signal });
         return response.status === 204 ? null : response.data;
     } catch (error) {
         throw toBankApiError(error);
@@ -30,7 +30,7 @@ export async function fetchBankDetails(signal?: AbortSignal): Promise<NxtGenBank
 /** Calls `GET /banks` for active bank options and their account-number validation rules. */
 export async function fetchBanks(signal?: AbortSignal): Promise<NxtGenBankMaster[]> {
     try {
-        const { data } = await httpClient.get<NxtGenBankMaster[]>('/banks', { signal });
+        const { data } = await httpClient.get<NxtGenBankMaster[]>('/reference-data/banks', { signal });
         return data;
     } catch (error) {
         throw toBankApiError(error);
@@ -40,7 +40,7 @@ export async function fetchBanks(signal?: AbortSignal): Promise<NxtGenBankMaster
 /** Calls `PUT /savebankdetails` to create or update the signed-in user's bank record. */
 export async function saveBankDetails(detail: NxtGenBankDetailUpdate): Promise<NxtGenBankDetail> {
     try {
-        const { data } = await httpClient.put<NxtGenBankDetail>('/savebankdetails', detail);
+        const { data } = await httpClient.put<NxtGenBankDetail>('/employees/me/bank-details', detail);
         return data;
     } catch (error) {
         throw toBankApiError(error);

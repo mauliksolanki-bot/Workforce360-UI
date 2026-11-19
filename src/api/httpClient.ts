@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { clearSession, loadStoredSession } from '../utils/tokenStorage';
+import { showGeneralApiErrorToast } from '../utils/apiErrorToast';
 
 /** Dispatched whenever a request is rejected with 401 after the user had an active session. */
 export const AUTH_LOGOUT_EVENT = 'workforce360:auth-logout';
@@ -53,11 +54,17 @@ httpClient.interceptors.response.use(
         }
 
         if (axios.isAxiosError(error)) {
+            if (error.code !== 'ERR_CANCELED' && (!error.response || error.response.status >= 500)) {
+                showGeneralApiErrorToast();
+            }
             const isLoginRequest = error.config?.url?.includes('/auth/login');
             if (error.response?.status === 401 && !isLoginRequest) {
                 clearSession();
                 window.dispatchEvent(new Event(AUTH_LOGOUT_EVENT));
             }
+        }
+        else {
+            showGeneralApiErrorToast();
         }
         return Promise.reject(error);
     },

@@ -7,4 +7,6 @@ export interface NxtGenNavigation {
     id: number;
     code: string;
     displayName: string;
+    isParent: string;
+    parentNavigationId: number | null;
 }
