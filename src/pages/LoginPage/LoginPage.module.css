@@ -1,6 +1,6 @@
 .card {
     width: 100%;
-    max-width: 408px;
+    max-width: 560px;
     background: var(--color-white);
     border-radius: var(--radius-xl);
     padding: 44px 40px;
@@ -28,8 +28,9 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 24px;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.55px;
     color: var(--color-slate-900);
 }
 
@@ -43,6 +44,21 @@
     background: var(--gradient-button);
     color: var(--color-white);
     font-size: 15px;
+    box-shadow: var(--shadow-sm);
+}
+
+.mobileWordmark {
+    font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Inter, sans-serif;
+    line-height: 1;
+    text-rendering: geometricPrecision;
+}
+
+.mobileWordmark span {
+    margin-left: 2px;
+    color: var(--color-brand-600);
+    font-weight: 900;
+    letter-spacing: -0.8px;
+    text-shadow: 0 1px 8px rgba(99, 79, 255, 0.18);
 }
 
 .title {

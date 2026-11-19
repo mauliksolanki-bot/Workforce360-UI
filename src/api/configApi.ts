@@ -38,6 +38,14 @@ export function fetchEditEducationDetailsPopupConfig(signal?: AbortSignal): Prom
     return getStaticConfig('/config/editedudetailspopup', signal);
 }
 
+export function fetchEditRoleDesignationPopupConfig(signal?: AbortSignal): Promise<NxtGenStaticConfig> {
+    return getStaticConfig('/config/editroledesignationpopup', signal);
+}
+
+export function fetchDeleteConfirmationPopupConfig(signal?: AbortSignal): Promise<NxtGenStaticConfig> {
+    return getStaticConfig('/config/deleteconfirm', signal);
+}
+
 function toConfigApiError(error: unknown): ConfigApiError {
     if (axios.isCancel(error) || (axios.isAxiosError(error) && error.code === 'ERR_CANCELED')) {
         return new ConfigApiError('Request canceled', undefined, true);

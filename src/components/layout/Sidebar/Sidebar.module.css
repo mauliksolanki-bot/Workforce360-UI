@@ -24,8 +24,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.65px;
     color: var(--color-slate-900);
 }
 
@@ -35,10 +36,28 @@
     justify-content: center;
     width: 34px;
     height: 34px;
-    border-radius: 10px;
+    border-radius: 11px;
     background: var(--gradient-button);
     color: var(--color-white);
     box-shadow: var(--shadow-sm);
+    font-size: 15px;
+    letter-spacing: -0.5px;
+}
+
+.brandWordmark span {
+    margin-left: 2px;
+    color: var(--color-brand-600);
+    font-weight: 900;
+    letter-spacing: -0.85px;
+    text-shadow: 0 1px 8px rgba(99, 79, 255, 0.18);
+}
+
+.brandWordmark {
+    font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Inter, sans-serif;
+    line-height: 1;
+    font-style: normal;
+    font-variation-settings: "wght" 800;
+    text-rendering: geometricPrecision;
 }
 
 .closeButton {

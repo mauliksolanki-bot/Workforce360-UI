@@ -95,9 +95,19 @@
 }
 
 .brandMarkText {
+    font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Inter, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.65px;
     font-size: 19px;
     font-weight: 700;
     letter-spacing: 0.2px;
+}
+
+.brandMarkText span {
+    margin-left: 2px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 900;
+    letter-spacing: -0.85px;
 }
 
 .tagline {

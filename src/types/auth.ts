@@ -12,6 +12,33 @@ export interface NxtGenEducationDetail {
     percentage: string | null;
 }
 
+export type BankAccountType = 'Salary Account' | 'Savings Account' | 'Current Account';
+
+export interface NxtGenBankDetail {
+    id: number;
+    empId: string;
+    accountNumber: string;
+    ifscCode: string;
+    bankName: string;
+    branchName: string;
+    accountType: BankAccountType;
+}
+
+export interface NxtGenBankMaster {
+    id: number;
+    bankName: string;
+    accountNumberLength: number;
+}
+
+export interface NxtGenBankDetailUpdate {
+    accountNumber: string;
+    repeatAccountNumber: string;
+    ifscCode: string;
+    bankName: string;
+    branchName: string;
+    accountType: BankAccountType | '';
+}
+
 export interface NxtGenUser {
     id: string;
     empId: string;
@@ -20,6 +47,7 @@ export interface NxtGenUser {
     empEmail: string;
     primaryRoleId: number;
     roleName: string;
+    roleLevel: string | null;
     isActive: string;
     createdBy: string;
     createdDate: string;

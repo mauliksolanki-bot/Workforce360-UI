@@ -67,7 +67,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <div className={styles.brandRow}>
                     <div className={styles.brand}>
                         <span className={styles.brandBadge}>W</span>
-                        <span>Workforce360</span>
+                        <span className={styles.brandWordmark}>Workforce<span>360</span></span>
                     </div>
                     <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close navigation">
                         <X size={18} aria-hidden="true" />
@@ -83,6 +83,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                                 <li key={id}>
                                     <NavLink
                                         to={path}
+                                        end
                                         onClick={onClose}
                                         className={({ isActive }) =>
                                             [styles.navLink, isActive ? styles.navLinkActive : null].filter(Boolean).join(' ')

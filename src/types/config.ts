@@ -3,7 +3,8 @@
  * layouts, field metadata hints, etc.) served by dedicated `/config/...` endpoints.
  *
  * The authoritative field list/labels/mandatory flags for a popup's form come from the generic
- * `NXTGEN_FORM_MASTER`/`NXTGEN_FORM_FIELDS_MASTER` tables (`GET /retriveform/{formCode}`, see
+ * `NXTGEN_FORM_MASTER`/`NXTGEN_FORM_FIELDS_MASTER` tables
+ * (`GET /form/getformdetails?formCode=...`, see
  * `formCode` below). `fieldMeta` only supplies presentation hints that table doesn't model
  * (placeholder text, max length, validation pattern), keyed by `FIELD_CODE`.
  */
@@ -35,9 +36,11 @@ export interface NxtGenStaticPopupConfig {
     cancelButtonLabel: string;
     emptyStateText: string;
     columnsPerRow?: number;
-    /** FORM_CODE to fetch the field list from via `GET /retriveform/{formCode}`. */
+    /** FORM_CODE sent as a query parameter when fetching the field list. */
     formCode: string;
     fieldMeta: Record<string, NxtGenStaticFieldMeta>;
+    yesButtonLabel?: string;
+    noButtonLabel?: string;
 }
 
 export interface NxtGenStaticConfig {

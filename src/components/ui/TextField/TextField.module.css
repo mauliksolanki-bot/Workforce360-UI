@@ -54,6 +54,12 @@
     color: var(--color-slate-900);
 }
 
+/* The wrapper provides the field's visible focus treatment. Prevent the global
+ * input:focus-visible rule from adding a second, inset outline around the input. */
+.input:focus-visible {
+    outline: none;
+}
+
 .input::placeholder {
     color: var(--color-slate-400);
 }

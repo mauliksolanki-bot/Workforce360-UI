@@ -77,7 +77,8 @@ function validateField(field: NxtGenStaticConfigField, rawValue: string): string
  * Edit-education popup. Presentation (title/button labels/empty state) comes from the
  * `EDIT_EDU_DETAILS` row in `NXTGEN_STATIC_CONFIG` (`GET /config/editedudetailspopup`); the actual field
  * list, labels and mandatory flags are the source of truth in
- * `NXTGEN_FORM_MASTER`/`NXTGEN_FORM_FIELDS_MASTER` (`GET /retriveform/{formCode}`), merged with
+ * `NXTGEN_FORM_MASTER`/`NXTGEN_FORM_FIELDS_MASTER`
+ * (`GET /form/getformdetails?formCode=...`), merged with
  * the config's per-field UI hints (placeholder/maxLength/pattern) at render time.
  */
 export function EducationDetailsModal({ isOpen, education, onClose, onSaved }: EducationDetailsModalProps) {

@@ -27,6 +27,16 @@ export async function fetchProfile(signal?: AbortSignal): Promise<NxtGenUser> {
     }
 }
 
+/** Calls `PUT /saveprofileinformation` to update the signed-in user's editable profile data. */
+export async function saveProfileInformation(phoneNumber: string): Promise<NxtGenUser> {
+    try {
+        const { data } = await httpClient.put<NxtGenUser>('/saveprofileinformation', { phoneNumber });
+        return data;
+    } catch (error) {
+        throw toProfileApiError(error);
+    }
+}
+
 function toProfileApiError(error: unknown): ProfileApiError {
     if (axios.isCancel(error) || (axios.isAxiosError(error) && error.code === 'ERR_CANCELED')) {
         return new ProfileApiError('Request canceled', undefined, true);

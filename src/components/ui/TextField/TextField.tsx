@@ -4,12 +4,14 @@ import styles from './TextField.module.css';
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
     error?: string;
+    labelIcon?: ReactNode;
+    labelClassName?: string;
     leadingIcon?: ReactNode;
     trailingAdornment?: ReactNode;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function TextField(
-    { label, error, leadingIcon, trailingAdornment, id, className, ...rest },
+    { label, error, labelIcon, labelClassName, leadingIcon, trailingAdornment, id, className, ...rest },
     ref,
 ) {
     const generatedId = useId();
@@ -18,7 +20,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
 
     return (
         <div className={styles.field}>
-            <label htmlFor={inputId} className={styles.label}>
+            <label htmlFor={inputId} className={[styles.label, labelClassName].filter(Boolean).join(' ')}>
+                {labelIcon ? <span aria-hidden="true">{labelIcon}</span> : null}
                 {label}
             </label>
             <div className={[styles.inputWrapper, error ? styles.inputWrapperError : null].filter(Boolean).join(' ')}>

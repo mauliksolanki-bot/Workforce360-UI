@@ -1,4 +1,4 @@
-import { Circle, LayoutDashboard, UserCircle } from 'lucide-react';
+import { Circle, LayoutDashboard, ReceiptText, ShieldCheck, UserCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface NavRoute {
@@ -17,6 +17,8 @@ interface NavRoute {
 const NAV_ROUTES_BY_CODE: Record<string, NavRoute> = {
     DASHBOARD: { path: '/dashboard', icon: LayoutDashboard },
     PROFILE: { path: '/profile', icon: UserCircle },
+    ROLES_DESIGNATIONS: { path: '/roles-designations', icon: ShieldCheck },
+    PAYROLL: { path: '/payroll', icon: ReceiptText },
 };
 
 const DEFAULT_NAV_ROUTE: NavRoute = { path: '/dashboard', icon: Circle };

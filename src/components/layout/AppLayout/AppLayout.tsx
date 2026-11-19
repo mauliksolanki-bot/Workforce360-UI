@@ -28,7 +28,7 @@ export function AppLayout() {
                     </button>
                     <div className={styles.topbarBrand}>
                         <span className={styles.brandBadge}>W</span>
-                        <span>Workforce360</span>
+                        <span className={styles.brandWordmark}>Workforce<span>360</span></span>
                     </div>
                 </header>
 

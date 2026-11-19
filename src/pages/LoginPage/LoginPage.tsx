@@ -40,7 +40,7 @@ const DEFAULT_REDIRECT = '/dashboard';
 
 export function LoginPage() {
     const { login } = useAuth();
-    const { showSuccess, showError } = useToast();
+    const { showError } = useToast();
     const navigate = useNavigate();
     const location = useLocation();
     const [serverError, setServerError] = useState<string | null>(null);
@@ -57,8 +57,7 @@ export function LoginPage() {
     const onSubmit = handleSubmit(async ({ email, password, rememberMe }) => {
         setServerError(null);
         try {
-            const user = await login({ email, password }, rememberMe);
-            showSuccess(`Welcome back, ${user.empFirstName}!`, 'Signed in successfully');
+            await login({ email, password }, rememberMe);
             const redirectTo = (location.state as LocationState | null)?.from?.pathname ?? DEFAULT_REDIRECT;
             navigate(redirectTo, { replace: true });
         } catch (error) {
@@ -74,7 +73,7 @@ export function LoginPage() {
                 <header className={styles.header}>
                     <div className={styles.mobileBrand}>
                         <span className={styles.mobileBrandBadge}>W</span>
-                        <span>Workforce360</span>
+                        <span className={styles.mobileWordmark}>Workforce<span>360</span></span>
                     </div>
                     <h2 className={styles.title}>Welcome back</h2>
                     <p className={styles.subtitle}>Sign in to your workspace to continue.</p>

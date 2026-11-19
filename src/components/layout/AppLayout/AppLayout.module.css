@@ -38,6 +38,24 @@
     color: var(--color-slate-900);
 }
 
+.brandWordmark span {
+    margin-left: 2px;
+    color: var(--color-brand-600);
+    font-weight: 900;
+    letter-spacing: -0.65px;
+    text-shadow: 0 1px 8px rgba(99, 79, 255, 0.18);
+}
+
+.brandWordmark {
+    font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Inter, sans-serif;
+    font-size: 16px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    font-style: normal;
+    font-variation-settings: "wght" 800;
+    text-rendering: geometricPrecision;
+}
+
 .brandBadge {
     display: flex;
     align-items: center;

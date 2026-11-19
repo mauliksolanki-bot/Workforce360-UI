@@ -39,7 +39,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
                 <div className={styles.brandContent}>
                     <div className={styles.brandMark}>
                         <span className={styles.brandMarkBadge}>W</span>
-                        <span className={styles.brandMarkText}>Workforce360</span>
+                        <span className={styles.brandMarkText}>Workforce<span>360</span></span>
                     </div>
 
                     <h1 className={styles.tagline}>Manage your entire workforce, with clarity and confidence.</h1>
